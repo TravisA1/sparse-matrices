@@ -78,10 +78,9 @@ class LinkedList(Generic[T]):
         if temp is None:
             return 0
         else:
-            length += 1
-        while temp.has_next():
-            length += 1
-            temp = temp.next_node
+            while temp is not None:
+                length += len(temp.value)
+                temp = temp.next_node
 
         # ------------------------------
         return length

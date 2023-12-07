@@ -33,7 +33,7 @@ def build_list():
         for n, c in enumerate(r):
             if c != '':
                 temp.add_to_end(item=c, idx=n)
-        l.add_to_end(item=temp.start, idx=idx)
+        l.add_to_end(item=temp, idx=idx)
     return l
 
 
@@ -43,21 +43,23 @@ def print_list(l: LinkedList):
     temp = l.start
     first = True
     while temp is not None:
-        if temp.value is not None:
+        if temp.value.start is not None:
             if not first:
                 print("")
                 print("\u2193")
-            cur = temp.value
+            cur = temp.value.start
             print(f"({temp.idx})", end="")
             while cur is not None:
                 print(f"\u2192({cur.idx}, {cur.value})", end="")
                 cur = cur.next_node
             first = False
         temp = temp.next_node
+    print("")
 
 
 if __name__ == "__main__":
-    mtrx = setup(dim=5, rate=0.25)
+    mtrx = setup()
     sparse = build_list()
     print_matrix(mtrx)
     print_list(sparse)
+    print(f"{len(sparse)=}")
