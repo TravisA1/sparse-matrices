@@ -3,17 +3,18 @@ from LinkedList import LinkedList
 import random
 import typing
 from typing import List, TypeVar
+
 T = TypeVar("T")
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 
-def setup(dim: int = 20):
+def setup(dim: int = 20, rate: float = 0.125):
     matrix = []
     for i in range(dim):
         matrix.append([])
         for j in range(dim):
-            if random.random() < 0.25:
+            if random.random() < rate:
                 matrix[i].append(alphabet[random.randint(0, 25)])
             else:
                 matrix[i].append('')
@@ -32,8 +33,7 @@ def build_list():
         for n, c in enumerate(r):
             if c != '':
                 temp.add_to_end(item=c, idx=n)
-        if not temp.is_empty():
-            l.add_to_end(item=temp.start, idx=idx)
+        l.add_to_end(item=temp.start, idx=idx)
     return l
 
 
@@ -41,23 +41,23 @@ def print_list(l: LinkedList):
     if l.is_empty():
         raise RuntimeError("What are the odds")
     temp = l.start
+    first = True
     while temp is not None:
-        cur = temp.value
-        print(f"({cur.idx}, {cur.value})", end="")
-        cur = cur.next_node
-        while cur is not None:
-            print(f"->({cur.idx}, {cur.value})", end="")
-            cur = cur.next_node
-        if temp.has_next():
-            print("")
-            print("|")
-            print("v")
+        if temp.value is not None:
+            if not first:
+                print("")
+                print("\u2193")
+            cur = temp.value
+            print(f"({temp.idx})", end="")
+            while cur is not None:
+                print(f"\u2192({cur.idx}, {cur.value})", end="")
+                cur = cur.next_node
+            first = False
         temp = temp.next_node
 
 
-
 if __name__ == "__main__":
-    mtrx = setup(dim=5)
+    mtrx = setup(dim=5, rate=0.25)
     sparse = build_list()
     print_matrix(mtrx)
     print_list(sparse)
