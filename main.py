@@ -63,3 +63,8 @@ if __name__ == "__main__":
     print_matrix(mtrx)
     print_list(sparse)
     print(f"{len(sparse)=}")
+    x, y = [int(i) for i in input("Give me the (x, y) coordinate of the value you wish to find. ").split()]
+    try:
+        print(sparse.coord(x, y))
+    except IndexError as e:
+        print(e)

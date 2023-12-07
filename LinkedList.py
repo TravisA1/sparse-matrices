@@ -355,3 +355,27 @@ class LinkedList(Generic[T]):
                 :return: a string describing this list.
                 """
         return self.__str__()  # in this case, the __repr__ and __str__ are the same.
+
+    def coord(self, x: int, y: int) -> T:
+        """
+        returns the value at the coordinate given, if no value exists, throws an error.
+        :param x: column of the item
+        :param y: row of the item
+        :return:
+        """
+        temp = self.start
+        while temp is not None:
+            if temp.idx == y:
+                break
+            else:
+                temp = temp.next_node
+        else:
+            raise IndexError("There is no item at this index.")
+        temp = temp.value.start
+        while temp is not None:
+            if temp.idx == x:
+                return temp.value
+            else:
+                temp = temp.next_node
+        else:
+            raise IndexError("There is no item at this index.")
