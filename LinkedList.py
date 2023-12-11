@@ -1,5 +1,5 @@
 from Node import Node
-from typing import Generic, TypeVar, List
+from typing import Generic, TypeVar, List, Tuple
 T = TypeVar("T")
 
 
@@ -379,3 +379,17 @@ class LinkedList(Generic[T]):
                 temp = temp.next_node
         else:
             raise IndexError("There is no item at this index.")
+
+    def search(self, c: T) -> List[Tuple[int, int]]:
+        result = []
+        temp = self.start
+        while temp is not None:
+            cur = temp.value.start
+            while cur is not None:
+                if cur.value == c:
+                    result += [cur.idx, temp.idx]
+                cur = cur.next_node
+            temp = temp.next_node
+        if len(result) > 0:
+            return result
+        raise IndexError(f"There is no instance of {c} in this array.")

@@ -2,7 +2,7 @@ from Node import Node
 from LinkedList import LinkedList
 import random
 import typing
-from typing import List, TypeVar
+from typing import List, TypeVar, Tuple
 
 T = TypeVar("T")
 
@@ -66,5 +66,12 @@ if __name__ == "__main__":
     x, y = [int(i) for i in input("Give me the (x, y) coordinate of the value you wish to find. ").split()]
     try:
         print(sparse.coord(x, y))
+    except IndexError as e:
+        print(e)
+    char = input("Gie me a value you wish to search for. ")
+    try:
+        r = sparse.search(char)
+        for i in range(0, len(r), 2):
+            print(f"({r[i]}, {r[i+1]})")
     except IndexError as e:
         print(e)
