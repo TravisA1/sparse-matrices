@@ -75,12 +75,21 @@ if __name__ == "__main__":
             print(f"({r[i]}, {r[i+1]})")
     except IndexError as e:
         print(e)
-    index = int(input("Please give me the index of the row you want. "))
+    row = int(input("Please give me the index of the row you want. "))
     try:
-        l = sparse.get_row(r=index)
-        temp = l.start
-        while temp is not None:
-            print(f"(({temp.idx}, {index}), {temp.value})")
-            temp = temp.next_node
+        row_list = sparse.get_row(r=row)
+        cur_node = row_list.start
+        while cur_node is not None:
+            print(f"(({cur_node.idx}, {row}), {cur_node.value})")
+            cur_node = cur_node.next_node
+    except IndexError as e:
+        print(e)
+    col = int(input("Please give me the index of the column you want. "))
+    try:
+        col_list = sparse.get_col(c=col)
+        cur_node = col_list.start
+        while cur_node is not None:
+            print(f"(({col}, {cur_node.idx}), {cur_node.value})")
+            cur_node = cur_node.next_node
     except IndexError as e:
         print(e)

@@ -401,3 +401,21 @@ class LinkedList(Generic[T]):
                 return temp.value
             temp = temp.next_node
         raise IndexError("Row out of bounds")
+
+    def get_col(self, c: int) -> "LinkedList[T]":
+        if c > len(self):
+            raise IndexError("Index out of range.")
+        result = LinkedList()
+        temp = self.start
+        while temp is not None:
+            cur = temp.value.start
+            while cur is not None:
+                if cur.idx == c:
+                    result.add_to_end(item=cur.value, idx=temp.idx)
+                    break
+                elif cur.idx < c:
+                    cur = cur.next_node
+                else:
+                    break
+            temp = temp.next_node
+        return result
