@@ -393,3 +393,11 @@ class LinkedList(Generic[T]):
         if len(result) > 0:
             return result
         raise IndexError(f"There is no instance of {c} in this array.")
+
+    def get_row(self, r: int) -> "LinkedList[T]":
+        temp = self.start
+        while temp is not None:
+            if temp.idx == r:
+                return temp.value
+            temp = temp.next_node
+        raise IndexError("Row out of bounds")

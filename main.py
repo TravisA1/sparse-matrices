@@ -68,10 +68,19 @@ if __name__ == "__main__":
         print(sparse.coord(x, y))
     except IndexError as e:
         print(e)
-    char = input("Gie me a value you wish to search for. ")
+    char = input("Give me a value you wish to search for. ")
     try:
         r = sparse.search(char)
         for i in range(0, len(r), 2):
             print(f"({r[i]}, {r[i+1]})")
+    except IndexError as e:
+        print(e)
+    index = int(input("Please give me the index of the row you want. "))
+    try:
+        l = sparse.get_row(r=index)
+        temp = l.start
+        while temp is not None:
+            print(f"(({temp.idx}, {index}), {temp.value})")
+            temp = temp.next_node
     except IndexError as e:
         print(e)
